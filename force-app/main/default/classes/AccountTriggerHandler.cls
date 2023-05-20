@@ -1,16 +1,16 @@
 public class AccountTriggerHandler {
     
-    public static void createOppForAccount(Map<Id,Account> accNewMap){ 
+    public static void createOppForAccount(Map<Id,Account> accNewMap){ //to store Id's in keyset
 
     List<Opportunity> oppList = new List<Opportunity>();
-    // Add an opportunity for each account if it doesn't already have one.
+    // Add an opportunity for each account if it doesn't already has one.
     // Iterate over accounts that are in this trigger but that don't have opportunities.
     // keySet() method returns a set that contains all of the keys (id) in the map. 
         
     for (Account a : [SELECT Id,Name, 
                             (SELECT Id FROM Opportunities) 
-                      FROM Account
-                     WHERE Id IN :accNewMap.keySet()]) {
+                                FROM Account
+                                WHERE Id IN :accNewMap.keySet()]) {
         
              if (a.Opportunities.isEmpty()){
                              // Add a default opportunity for this account    

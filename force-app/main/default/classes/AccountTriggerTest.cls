@@ -10,14 +10,14 @@ public class AccountTriggerTest {
     static void insertAccTest(){
         Account acc = [SELECT Id, Name FROM Account WHERE Name = 'testAccount'];
         List<Opportunity> opp = [SELECT Id FROM Opportunity WHERE AccountId =:acc.Id];
-        System.assert(opp.size()>0, 'Account için oluşturulmuş bir Opportunity bulunamadı!');
+        System.assert(opp.size()>0, 'No opportunity found created in the Account!!');
     }
     
     @isTest
     static void updateAccTest(){
         Account acc = [SELECT Id, Name FROM Account WHERE Name = 'testAccount'];      
         List<Opportunity> opp = [SELECT Id FROM Opportunity WHERE AccountId =:acc.Id];
-        System.assert(opp.size()>0, 'Account için oluşturulmuş bir Opportunity bulunamadı!');
+        System.assert(opp.size()>0, 'No opportunity found created in the Account!');
         delete opp;
         
         List<Opportunity> opp2 = [SELECT Id FROM Opportunity WHERE AccountId =:acc.Id];
@@ -29,7 +29,7 @@ public class AccountTriggerTest {
         Test.stopTest();
         
         List<Opportunity> opp3 = [SELECT Id FROM Opportunity WHERE AccountId =:acc.Id];
-        System.assert(opp3.size()>0, 'Account için oluşturulmuş bir Opportunity bulunamadı!');
+        System.assert(opp3.size()>0, 'No opportunity found created in the Account!');
         System.assertEquals(1, opp3.size());
 
     }
