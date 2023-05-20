@@ -21,7 +21,7 @@ public class AccountTriggerHandler {
              }                
     }
     	
-    System.debug('Merge Deneme');
+    System.debug('Merge Test');
         if (!oppList.isEmpty()) {
             insert oppList;
         }

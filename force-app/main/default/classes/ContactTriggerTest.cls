@@ -38,8 +38,8 @@ public class ContactTriggerTest {
     static void testPassiveCon (){
         Account acc = new Account (Name='testAccount2');
         insert acc;
-        Contact con4 = new Contact (LastName='testContact4', AccountId=acc.Id, Active__c=false); 
-		insert con4;
+        Contact con4 = new Contact (LastName='testContact4', AccountId=acc.Id, Active__c=false); //add a passive cont
+		insert con4; //and passive shouldn be included to calculation
         
         Account accUpdated = [SELECT Id, Active_Contacts__c FROM Account WHERE Name = 'testAccount2' LIMIT 1];
         System.assertEquals(0, accUpdated.Active_Contacts__c); // negative test - active>false accounts
@@ -51,18 +51,18 @@ public class ContactTriggerTest {
     static void testDelete (){
         Contact con = [SELECT Id, LastName FROM Contact WHERE LastName = 'testContact1' LIMIT 1];
         Test.startTest();
-        delete con;
+        delete con; //delete active contact created in setup
         
         Account accUpdated = [SELECT Id, Active_Contacts__c FROM Account WHERE Name = 'testAccount' LIMIT 1];
        
         System.assertEquals(2, accUpdated.Active_Contacts__c);
-        System.assertNotEquals(3, accUpdated.Active_Contacts__c);
+        //System.assertNotEquals(3, accUpdated.Active_Contacts__c);
        	
-        undelete con;
+        undelete con; //when you undelete number should be 3 again...
         Test.stopTest();
         Account accUpdated2 = [SELECT Id, Active_Contacts__c FROM Account WHERE Name = 'testAccount' LIMIT 1];
         System.assertEquals(3, accUpdated2.Active_Contacts__c);
-        System.assertNotEquals(2, accUpdated2.Active_Contacts__c);
+        //System.assertNotEquals(2, accUpdated2.Active_Contacts__c); //the value before trigger
     }
     
 }
