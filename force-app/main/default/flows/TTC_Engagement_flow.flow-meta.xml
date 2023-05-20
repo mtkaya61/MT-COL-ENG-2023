@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>ttcassignmetnalert</name>
+        <label>ttcassignmetnalert</label>
+        <locationX>50</locationX>
+        <locationY>2135</locationY>
+        <actionName>TTC_records__c.TTC_email_alert_for_assignment</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>update_in_ttc_status</name>
+        <label>update in ttc status</label>
+        <locationX>50</locationX>
+        <locationY>1799</locationY>
+        <actionName>TTC_records__c.Update_in_TTC_status</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>TTC_assignment_alert</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>55.0</apiVersion>
+    <decisions>
+        <name>leadis_not_blank</name>
+        <label>leadis not blank</label>
+        <locationX>182</locationX>
+        <locationY>1007</locationY>
+        <defaultConnector>
+            <targetReference>TTC_field_manipulation_TTC_action_is_not_blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>lead_is_not_blank</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>leadisnotblank</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>set_accout_name_to_lead_s_company_name</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>lead is not blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Notify_TTC_status_Update</name>
+        <label>Notify requestor TTC status Update</label>
+        <locationX>182</locationX>
+        <locationY>1679</locationY>
+        <defaultConnector>
+            <targetReference>TTC_assignment_alert</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Notify_requestor_TTC_status_Update</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NotifyrequestoraboutTTCstatuschange</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>update_in_ttc_status</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Notify requestor TTC status Update</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Opportunity_isnot_blank</name>
+        <label>Opportunity is notblank</label>
+        <locationX>182</locationX>
+        <locationY>671</locationY>
+        <defaultConnector>
+            <targetReference>leadis_not_blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Opportunity_not_blank</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>set_account_to_Opportunity_s_account</targetReference>
+            </connector>
+            <label>Opportunity not blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>TTC_assignment_alert</name>
+        <label>TTC assignment alert</label>
+        <locationX>182</locationX>
+        <locationY>2015</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>TTCassignment_alert</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ttc_collaborated</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ttcassignmetnalert</targetReference>
+            </connector>
+            <label>TTCassignment alert</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>TTC_field_manipulation_blank_Requestor</name>
+        <label>TTC field manipulation_blank Requestor</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <defaultConnector>
+            <targetReference>Opportunity_isnot_blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Blank_Requestor</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Requestor__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>isNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>set_requestor_to_current_logged_in_user</targetReference>
+            </connector>
+            <label>Blank Requestor</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>TTC_field_manipulation_TTC_action_is_not_blank</name>
+        <label>TTC field manipulation TTC action is not blank</label>
+        <locationX>182</locationX>
+        <locationY>1343</locationY>
+        <defaultConnector>
+            <targetReference>Notify_TTC_status_Update</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>TTC_field_manipulation_TTC_action_is_not_blank1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>UpdateTTCStatusfield</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>TTC_status_is_updated_with_TTC_action</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>TTC field manipulation TTC action is not blank1</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <name>isNew</name>
+        <dataType>Boolean</dataType>
+        <expression>isNew()</expression>
+    </formulas>
+    <formulas>
+        <name>leadisnotblank</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(ISNEW(),NOT(ISBLANK({!$Record.Lead__c})))</expression>
+    </formulas>
+    <formulas>
+        <name>NewTTCandblankrequestor</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(ISNEW(),ISBLANK({!$Record.Requestor__c}))</expression>
+    </formulas>
+    <formulas>
+        <name>NewTTCandoppisblank</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(ISNEW(),NOT(ISBLANK({!$Record.Opportunity__c})))</expression>
+    </formulas>
+    <formulas>
+        <name>NotifyrequestoraboutTTCstatuschange</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(ISCHANGED({!$Record.TTC_status__c}),
+OR(ISPICKVAL({!$Record.TTC_status__c}, &apos;TTC Collaborated&apos;),
+
+ISPICKVAL({!$Record.TTC_status__c}, &apos;Approved&apos;),
+ISPICKVAL({!$Record.TTC_status__c}, &apos;Rejected&apos;)))</expression>
+    </formulas>
+    <formulas>
+        <name>populateRequestor</name>
+        <dataType>String</dataType>
+        <expression>IF(!ISBLANK({!$Record.Lead__c}), {!$Record.Lead__r.OwnerId}, {!$Record.Opportunity__r.OwnerId})</expression>
+    </formulas>
+    <formulas>
+        <name>ttc_collaborated</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(ISCHANGED({!$Record.TTC_status__c}),
+ISPICKVAL({!$Record.TTC_status__c}, &apos;TTC Collaborated&apos;))</expression>
+    </formulas>
+    <formulas>
+        <name>UpdateTTCStatusfield</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(ISCHANGED({!$Record.TTC_action__c} ))</expression>
+    </formulas>
+    <interviewLabel>TTC Engagement flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>TTC Engagement flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>set_account_to_Opportunity_s_account</name>
+        <label>set account to Opportunity&apos;s account</label>
+        <locationX>50</locationX>
+        <locationY>791</locationY>
+        <connector>
+            <targetReference>leadis_not_blank</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Account_Name__c</field>
+            <value>
+                <elementReference>$Record.Opportunity__r.Account.Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>set_accout_name_to_lead_s_company_name</name>
+        <label>set accout name to lead&apos;s company name</label>
+        <locationX>50</locationX>
+        <locationY>1127</locationY>
+        <connector>
+            <targetReference>TTC_field_manipulation_TTC_action_is_not_blank</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Account_Name__c</field>
+            <value>
+                <elementReference>$Record.Lead__r.Company</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>set_requestor_to_current_logged_in_user</name>
+        <label>set requestor to current logged in user</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <connector>
+            <targetReference>Opportunity_isnot_blank</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Requestor__c</field>
+            <value>
+                <elementReference>populateRequestor</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>TTC_status_is_updated_with_TTC_action</name>
+        <label>TTC status is updated with TTC action</label>
+        <locationX>50</locationX>
+        <locationY>1463</locationY>
+        <connector>
+            <targetReference>Notify_TTC_status_Update</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TTC_status__c</field>
+            <value>
+                <elementReference>$Record.TTC_action__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>TTC_field_manipulation_blank_Requestor</targetReference>
+        </connector>
+        <object>TTC_records__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

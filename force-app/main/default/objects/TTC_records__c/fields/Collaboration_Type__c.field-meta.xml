@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Collaboration_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Collaboration Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Restart installation</fullName>
+                <default>false</default>
+                <label>Restart installation</label>
+            </value>
+            <value>
+                <fullName>Version Update</fullName>
+                <default>false</default>
+                <label>Version Update</label>
+            </value>
+            <value>
+                <fullName>Security update</fullName>
+                <default>false</default>
+                <label>Security update</label>
+            </value>
+            <value>
+                <fullName>Unlock account</fullName>
+                <default>false</default>
+                <label>Unlock account</label>
+            </value>
+            <value>
+                <fullName>Technical Issues</fullName>
+                <default>false</default>
+                <label>Technical Issues</label>
+            </value>
+            <value>
+                <fullName>Installation Error</fullName>
+                <default>false</default>
+                <label>Installation Error</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

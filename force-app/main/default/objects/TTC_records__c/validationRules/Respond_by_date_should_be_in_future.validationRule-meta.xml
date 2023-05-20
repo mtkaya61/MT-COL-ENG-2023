@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Respond_by_date_should_be_in_future</fullName>
+    <active>true</active>
+    <description>Respond by date should be in future and minimum 5 days interval from today</description>
+    <errorConditionFormula>Respond_by_Date__c &lt; TODAY()+5</errorConditionFormula>
+    <errorDisplayField>Respond_by_Date__c</errorDisplayField>
+    <errorMessage>Respond by date should be in future and minimum 5 days interval from today</errorMessage>
+</ValidationRule>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Link_TTC_to_a_Lead_or_Opportunity</fullName>
+    <active>true</active>
+    <description>Link_TTC_to_a_Lead_or_Opportunity</description>
+    <errorConditionFormula>AND(ISBLANK(Lead__c),ISBLANK(Opportunity__c))</errorConditionFormula>
+    <errorMessage>TTC collaboration needs to be linked to either Lead or Opportunity</errorMessage>
+</ValidationRule>

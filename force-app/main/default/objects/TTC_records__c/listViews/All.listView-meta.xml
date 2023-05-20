@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>TTC_status__c</columns>
+    <columns>Collaboration_Type__c</columns>
+    <columns>Scope__c</columns>
+    <columns>Engagement_Summary__c</columns>
+    <columns>Environment__c</columns>
+    <columns>Use_cases_to_Address__c</columns>
+    <columns>Technical_information_needed__c</columns>
+    <columns>Respond_by_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Records</label>
+</ListView>

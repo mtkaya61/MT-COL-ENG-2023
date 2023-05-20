@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TTC_text_areas_blank_validation_error</fullName>
+    <active>true</active>
+    <description>TTC_text_areas_blank_validation_error</description>
+    <errorConditionFormula>OR(ISBLANK(Scope__c), ISBLANK(Technical_information_needed__c ), ISBLANK(Engagement_Summary__c), ISBLANK(TEXT(Environment__c) ))</errorConditionFormula>
+    <errorMessage>Scope,Technical_information_needed, Engagement_Summary &amp; Environment__c cannot be blank</errorMessage>
+</ValidationRule>

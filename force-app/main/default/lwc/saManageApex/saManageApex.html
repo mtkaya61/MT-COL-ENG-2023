@@ -1,0 +1,35 @@
+<template>
+	<lightning-card title="All Sales Agent Details" icon-name="standard:groups">
+		<div class="slds-card__body slds-card__body_inner ">
+
+			<template if:true={sadetails.data}>
+
+				<lightning-input type="search" onchange={handleSearchTermChange} variant="label-hidden"
+					class="slds-var-m-bottom_small" label="Search" placeholder="Search for Sales Agents"
+					value={searchTerm}>
+				</lightning-input>
+
+				<lightning-layout multiple-rows="true" pull-to-boundary="small" class="salist_container">
+					<template for:each={sadetails.data} for:item="sadetail">
+						<lightning-layout-item key={sadetail.Id} size="3" class="slds-var-p-around_x-small">
+							<c-sa-tile sadetail={sadetail} onsaview={handleSAView}></c-sa-tile>
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+
+				<template if:false={hasResults}>
+					<div class="slds-align_absolute-center slds-var-m-vertical_small">
+						This is very disturbing, we did not find results...
+					</div>
+				</template>
+			</template>
+
+			<!-- Data failed to load -->
+			<template if:true={sadetails.error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the Sales Agent list. Error Message: {sadetails.error}
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>

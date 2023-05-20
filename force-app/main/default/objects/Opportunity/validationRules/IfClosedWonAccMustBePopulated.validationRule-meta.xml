@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IfClosedWonAccMustBePopulated</fullName>
+    <active>true</active>
+    <description>Opp stage can not be updated to Closed Won if Account info is missing</description>
+    <errorConditionFormula>ISBLANK(AccountId) &amp;&amp;  ISPICKVAL(StageName, &apos;Closed Won&apos;)</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Opp stage can not be updated to Closed Won if Account info is missing</errorMessage>
+</ValidationRule>

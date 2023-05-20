@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title={sadetail.Name__c} class="sa-tile slds-media">
+
+        <div slot="actions">
+            <lightning-button-icon icon-name="utility:search" icon-class="sa-tile-button" variant="outline"
+                alternative-text="Open record" onclick={handleOpenRecordClick}>
+            </lightning-button-icon>
+        </div>
+
+        <div class="slds-var-p-horizontal_small">
+            <div class="slds-media">
+                <div class="slds-media__figure">
+                    <span class="slds-avatar slds-avatar_circle slds-avatar_medium">
+                        <img alt="" src="https://www.lightningdesignsystem.com/assets/images/avatar1.jpg"
+                            title="User Avatar" />
+                    </span>
+                </div>
+
+                <div class="slds-media__body">
+
+                    <p class="slds-var-m-bottom_xx-small" title={sadetail.Name__c}>Name: {sadetail.Name__c}</p>
+                    <p class="slds-var-m-bottom_xx-small" title={sadetail.Customer_handled__c}> Customer Handled:
+                        {sadetail.Customer_handled__c}</p>
+                    <p class="slds-var-m-bottom_xx-small" title={sadetail.Date_of_Joining__c}>Date of Joining:
+                        {sadetail.Date_of_Joining__c}</p>
+                    <p class="slds-var-m-bottom_xx-small" title={sadetail.Experience__c}>Experience:
+                        {sadetail.Experience__c}</p>
+
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>
