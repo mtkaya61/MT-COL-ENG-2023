@@ -7,7 +7,7 @@
 				<lightning-input type="search" onchange={handleSearchTermChange} variant="label-hidden"
 					class="slds-var-m-bottom_small" label="Search" placeholder="Search for Sales Agents"
 					value={searchTerm}>
-				</lightning-input>
+				</lightning-input><!-- input is created in parent component! -->
 
 				<lightning-layout multiple-rows="true" pull-to-boundary="small" class="salist_container">
 					<template for:each={sadetails.data} for:item="sadetail">

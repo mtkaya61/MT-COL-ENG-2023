@@ -33,7 +33,7 @@ public class LeadBatchTest {
             Test.startTest();
 
             LeadBatch myScheduledBatch = new LeadBatch ();
-            String cronExp='0 0 23 * * ?'; //define as every day and every month
+            String cronExp='0 0 23 * * ? 2023'; //define as every day and every month
             String JobId= System.schedule('Lead batch Test', cronExp, myScheduledBatch); //give a name to the job
             //after planning, it will give me a jobId 
 
