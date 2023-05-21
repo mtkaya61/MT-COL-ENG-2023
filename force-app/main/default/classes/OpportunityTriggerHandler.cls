@@ -1,4 +1,5 @@
 public class OpportunityTriggerHandler {
+
      
     public static void createTaskForClosedWonOpp(List<Opportunity> oppList, Map<Id, Opportunity> oppOldMap){
         List<Task> taskList = new List<Task>();
@@ -22,4 +23,18 @@ public class OpportunityTriggerHandler {
         	insert taskList;        
        }
     }
+
+//Validation in Opportunity for stage field
+
+    public static void Validation (List<Opportunity> listOpp){       
+        for(Opportunity opp : listOpp){              
+                if(String.isBlank(opp.AccountId) && opp.StageName == 'Closed Won'){
+                    opp.addError('Stage can not be \'Closed Won\' when Account Name is blank.');
+                
+                }else if(String.isBlank(opp.Id) && (opp.StageName=='Closed Won' || opp.StageName=='Closed Lost')){ 
+                    //before insert ise Id boştur henüz.
+                    opp.addError('The stage of a Newly created Opportunity can not be \'Closed Won\' or \'Closed Lost\'');
+            }              
+        }     
+    }    
 }
