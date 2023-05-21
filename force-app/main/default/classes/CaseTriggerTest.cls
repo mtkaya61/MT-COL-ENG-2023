@@ -17,7 +17,7 @@ public class CaseTriggerTest {
         Test.stopTest();
         
         Case updatedChildCase = [SELECT Id, ParentId FROM Case WHERE Subject = 'testSubject3' LIMIT 1];
-        System.assertEquals(oldCase1.Id, updatedChildCase.ParentId, 'Parent Case ataması yapılmamış!');
+        System.assertEquals(oldCase1.Id, updatedChildCase.ParentId, 'Parent case could not be assigned!');
         
      }
 }

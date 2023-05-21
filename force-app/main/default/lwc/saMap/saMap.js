@@ -16,7 +16,7 @@ export default class SaMap extends LightningElement {
       this.messageContext,
       SA_LIST_UPDATE_MESSAGE,
       (message) => {
-        this.handlesAListUpdate(message);
+        this.handleSAListUpdate(message); //subscribe syntax ... and we have method "handlesAListUpdate"
       }
     );
   }
@@ -24,7 +24,7 @@ export default class SaMap extends LightningElement {
     unsubscribe(this.subscription);
     this.subscription = null;
   }
-  handlesAListUpdate(message) {
+  handleSAListUpdate(message) {
     this.mapMarkers = message.sadetails.map((sadetail) => {
       const Latitude = sadetail.Location__Latitude__s;
       const Longitude = sadetail.Location__Longitude__s;

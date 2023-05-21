@@ -25,7 +25,7 @@ public class CaseTriggerHandler {
                           
                         break;
                     }
-                }
+                }//we can improve the solution by checking only open cases!
             }
         }
     }

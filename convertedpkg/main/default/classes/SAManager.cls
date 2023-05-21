@@ -7,6 +7,8 @@ public with sharing class SAManager {
         
     }
 	
+
+    //search method 
 	@AuraEnabled(cacheable=true scope='global')
     public static List<SA_details__c> searchSas(String searchTerm) {
         
@@ -16,7 +18,7 @@ public with sharing class SAManager {
         }
         
         searchTerm = '%' + searchTerm + '%';
-        
+        //for the location information...
         return [
             SELECT
                 Id,

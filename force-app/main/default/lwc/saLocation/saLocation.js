@@ -13,7 +13,7 @@ const saFields = [
 export default class saLocation extends LightningElement {
   @api recordId;
   name;
-  mapMarkers = [];
+  mapMarkers = []; //array will be stored
 
   @wire(getRecord, {
     recordId: "$recordId",

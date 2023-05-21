@@ -1,12 +1,12 @@
 import { publish, MessageContext } from "lightning/messageService";
-import SA_LIST_UPDATE_MESSAGE from "@salesforce/messageChannel/SAListUpdate__c";
+import SA_LIST_UPDATE_MESSAGE from "@salesforce/messageChannel/SAListUpdate__c";//message channel name
 
 import { NavigationMixin } from "lightning/navigation";
 import { LightningElement, wire } from "lwc";
 import searchSas from "@salesforce/apex/SAManager.searchSas";
 
 export default class SAManageApex extends NavigationMixin(LightningElement) {
-  searchTerm = "";
+  searchTerm = ""; //corresponding property of apex search variable
 
   sadetails;
   @wire(MessageContext) messageContext;
@@ -21,7 +21,7 @@ export default class SAManageApex extends NavigationMixin(LightningElement) {
       };
       publish(this.messageContext, SA_LIST_UPDATE_MESSAGE, message);
     }
-  }
+  }//data coming through apex class will be assigned into sadetails property...
 
   handleSearchTermChange(event) {
     // Debouncing this method: do not update the reactive property as
@@ -33,7 +33,7 @@ export default class SAManageApex extends NavigationMixin(LightningElement) {
     // eslint-disable-next-line @lwc/lwc/no-async-operation
     this.delayTimeout = setTimeout(() => {
       this.searchTerm = searchTerm;
-    }, 300);
+    }, 3000);
   }
 
   get hasResults() {
@@ -41,7 +41,7 @@ export default class SAManageApex extends NavigationMixin(LightningElement) {
   }
 
   handleSAView(event) {
-    const saId = event.detail;
+    const saId = event.detail;//record Id is assigned here
 
     this[NavigationMixin.Navigate]({
       type: "standard__recordPage",
