@@ -32,7 +32,7 @@ public class OpportunityTriggerHandler {
                     opp.addError('Stage can not be \'Closed Won\' when Account Name is blank.');
                 
                 }else if(String.isBlank(opp.Id) && (opp.StageName=='Closed Won' || opp.StageName=='Closed Lost')){ 
-                    //before insert ise Id boştur henüz.
+                    //in before insert there is no ID
                     opp.addError('The stage of a Newly created Opportunity can not be \'Closed Won\' or \'Closed Lost\'');
             }              
         }     
