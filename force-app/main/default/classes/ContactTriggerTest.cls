@@ -14,8 +14,7 @@ public class ContactTriggerTest {
         insert conList;
         Account accUpdated = [SELECT Id, Active_Contacts__c FROM Account WHERE Id = :acc.Id];
         System.assertEquals(3, accUpdated.Active_Contacts__c);  //assertion for insert above
-
-             
+        
     }
 
     //test for update 
@@ -30,7 +29,7 @@ public class ContactTriggerTest {
         Test.stopTest();//provides different transaction with fresh dml limits..
         Account accUpdated = [SELECT Id, Active_Contacts__c FROM Account WHERE Name = 'testAccount' LIMIT 1];
         System.assertEquals(2, accUpdated.Active_Contacts__c);//active contacts are 2 in the account?
-        System.assertNotEquals(3, accUpdated.Active_Contacts__c);
+      //  System.assertNotEquals(3, accUpdated.Active_Contacts__c);
  
     }
     
@@ -43,7 +42,7 @@ public class ContactTriggerTest {
         
         Account accUpdated = [SELECT Id, Active_Contacts__c FROM Account WHERE Name = 'testAccount2' LIMIT 1];
         System.assertEquals(0, accUpdated.Active_Contacts__c); // negative test - active>false accounts
-        System.assertNotEquals(1, accUpdated.Active_Contacts__c);
+        //System.assertNotEquals(1, accUpdated.Active_Contacts__c);
         
     } 
     

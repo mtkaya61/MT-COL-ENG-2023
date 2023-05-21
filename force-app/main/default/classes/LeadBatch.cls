@@ -6,7 +6,7 @@ public class LeadBatch implements Database.Batchable<SObject>, Schedulable{
      * Can return upto 50 million records
      * */
     public Database.QueryLocator start(Database.BatchableContext BC){
-        return Database.getQueryLocator('SELECT Id, LeadSource FROM Lead WHERE leadsource = null');
+        return Database.getQueryLocator('SELECT Id, LeadSource FROM Lead WHERE leadsource = null'); //give me lead with leadsource null
     }
 
     /**
@@ -16,18 +16,18 @@ public class LeadBatch implements Database.Batchable<SObject>, Schedulable{
      * Each execution will get new set of governor limits
      * */
     public void execute(Database.BatchableContext BC, List<Lead> scope){
-        for(Lead leadRecord : scope){
+        for(Lead leadRecord : scope){ //iterate records and update with manual
       		leadRecord.LeadSource = 'Manual';
         }
        
-        Database.update(scope, false);
+        Database.update(scope, false);//partial update is ok.
     }
 
     /**
      * Finish Method
      * Executes only once
      * Called after all batches are processed
-     * Can be used for post processing
+     * Can be used for post processing and give information...
      * */
     public void finish(Database.BatchableContext BC){
              System.debug('Batch finished');

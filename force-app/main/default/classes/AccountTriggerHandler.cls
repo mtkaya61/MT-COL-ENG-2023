@@ -12,14 +12,15 @@ public class AccountTriggerHandler {
                                 FROM Account
                                 WHERE Id IN :accNewMap.keySet()]) {
         
-             if (a.Opportunities.isEmpty()){
-                             // Add a default opportunity for this account    
+             if (a.Opportunities.isEmpty()){//if true, there is no opp and must create a new one 
+         
+                // Add a default opportunity for this account    
         oppList.add(new Opportunity(Name=a.Name + ' Opportunity',
                                    StageName='Prospecting',
                                    CloseDate=System.today().addMonths(1),	
                                    AccountId=a.Id)); 
              }                
-    }
+    }//if there is no opp in account, I created a new one for each account records without opp!
     	
     System.debug('Merge Test');
         if (!oppList.isEmpty()) {
