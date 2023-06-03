@@ -9,7 +9,7 @@ private class CaseManagerTest {
         RestRequest request = new RestRequest();
         request.requestUri =
             'https://yourInstance.my.salesforce.com/services/apexrest/Cases/'
-            + recordId;
+            + recordId; //pretending request is coming, then testing 
         request.httpMethod = 'GET';
         RestContext.request = request;
         // Call the method to test
@@ -41,7 +41,7 @@ private class CaseManagerTest {
         RestRequest request = new RestRequest();
         request.requestUri =
             'https://yourInstance.my.salesforce.com/services/apexrest/Cases/'
-            + recordId;
+            + recordId; //pretending we have a request coming from 3rd party
         request.httpMethod = 'DELETE';
         RestContext.request = request;
         // Call the method to test
@@ -57,7 +57,7 @@ private class CaseManagerTest {
     @isTest static void testUpsertCase() {
         // 1. Insert new record
         ID case1Id = CaseManager.upsertCase(
-                'Version Update issue', 'New', 'Phone', 'Low', null);
+                'Version Update issue', 'New', 'Phone', 'Low', null); //method is used from actual class
         // Verify new record was created
         System.assert(Case1Id != null);
         Case case1 = [SELECT Id,Subject FROM Case WHERE Id=:case1Id];
@@ -74,7 +74,7 @@ private class CaseManagerTest {
     }    
 
     // Helper method
-    static Id createTestRecord() {
+    static Id createTestRecord() { //method will return Case ID
         // Create test record
         Case caseTest = new Case(
             Subject='Test record',
