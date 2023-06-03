@@ -1,4 +1,4 @@
-@RestResource(urlMapping='/Cases/*')
+@RestResource(urlMapping='/Cases/*') //Id will be taken from URL.
 global with sharing class CaseManager {
     @HttpGet
     global static Case getCaseById() {
@@ -24,14 +24,7 @@ global with sharing class CaseManager {
         insert thisCase;
         return thisCase.Id;
     }   
-    @HttpDelete
-    global static void deleteCase() {
-        RestRequest request = RestContext.request;
-        String caseId = request.requestURI.substring(
-            request.requestURI.lastIndexOf('/')+1);
-        Case thisCase = [SELECT Id FROM Case WHERE Id = :caseId];
-        delete thisCase;
-    }     
+  
     @HttpPut
     global static ID upsertCase(String subject, String status,
         String origin, String priority, String id) {
@@ -47,4 +40,12 @@ global with sharing class CaseManager {
         // Return the case ID.
         return thisCase.Id;
     }
+    @HttpDelete
+    global static void deleteCase() {
+        RestRequest request = RestContext.request;
+        String caseId = request.requestURI.substring(
+            request.requestURI.lastIndexOf('/')+1);
+        Case thisCase = [SELECT Id FROM Case WHERE Id = :caseId];
+        delete thisCase; 
+    }     
 }
