@@ -74,7 +74,7 @@ private class CaseManagerTest {
     }    
 
     // Helper method
-    static Id createTestRecord() { //method will return Case ID
+    static Id createTestRecord() { //method will return Case ID..
         // Create test record
         Case caseTest = new Case(
             Subject='Test record',
