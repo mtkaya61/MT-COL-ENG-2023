@@ -1,5 +1,8 @@
 @IsTest
 private class CaseManagerTest {
+  
+  
+  
     @isTest static void testGetCaseById() {
         Id recordId = createTestRecord();
         // Set up a test request
@@ -15,6 +18,10 @@ private class CaseManagerTest {
         System.assert(thisCase != null);
         System.assertEquals('Test record', thisCase.Subject);
     }
+  
+  
+  
+  
     @isTest static void testCreateCase() {
         // Call the method to test
         ID thisCaseId = CaseManager.createCase(
@@ -25,6 +32,9 @@ private class CaseManagerTest {
         System.assert(thisCase != null);
         System.assertEquals(thisCase.Subject, 'Version Update issue');
     }
+    
+    
+    
     @isTest static void testDeleteCase() {
         Id recordId = createTestRecord();
         // Set up a test request
@@ -40,6 +50,10 @@ private class CaseManagerTest {
         List<Case> cases = [SELECT Id FROM Case WHERE Id=:recordId];
         System.assert(cases.size() == 0);
     }
+    
+    
+    
+    
     @isTest static void testUpsertCase() {
         // 1. Insert new record
         ID case1Id = CaseManager.upsertCase(
