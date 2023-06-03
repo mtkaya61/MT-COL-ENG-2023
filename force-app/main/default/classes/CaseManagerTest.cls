@@ -59,7 +59,7 @@ private class CaseManagerTest {
         ID case1Id = CaseManager.upsertCase(
                 'Version Update issue', 'New', 'Phone', 'Low', null); //method is used from actual class
         // Verify new record was created
-        System.assert(Case1Id != null);
+        System.assert(Case1Id != null);//this one can be enough to assert...
         Case case1 = [SELECT Id,Subject FROM Case WHERE Id=:case1Id];
         System.assert(case1 != null);
         System.assertEquals(case1.Subject, 'Version Update issue');
@@ -67,7 +67,7 @@ private class CaseManagerTest {
         ID case2Id = CaseManager.upsertCase(
                 'Version Update issue', 'Working', 'Phone', 'Low', case1Id);
         // Verify record was updated
-        System.assertEquals(case1Id, case2Id);
+        System.assertEquals(case1Id, case2Id);//created one and updated one must be the same!
         Case case2 = [SELECT Id,Status FROM Case WHERE Id=:case2Id];
         System.assert(case2 != null);
         System.assertEquals(case2.Status, 'Working');
