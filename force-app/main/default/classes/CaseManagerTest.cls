@@ -45,7 +45,7 @@ private class CaseManagerTest {
         request.httpMethod = 'DELETE';
         RestContext.request = request;
         // Call the method to test
-        CaseManager.deleteCase();
+        CaseManager.deleteCase(); //call tthe method from actual class and test it...
         // Verify record is deleted
         List<Case> cases = [SELECT Id FROM Case WHERE Id=:recordId];
         System.assert(cases.size() == 0);
